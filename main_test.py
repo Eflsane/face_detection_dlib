@@ -26,16 +26,6 @@ def eye_aspect_ratio(eye):
     # return the eye aspect ratio
     return ear
 
-# Calculate the angle between the eyes
-def calculate_eye_angle(eye_landmarks):
-    # Calculate the change in y-coordinates
-    dy = (eye_landmarks[3][1] - eye_landmarks[0][1] + eye_landmarks[4][1] - eye_landmarks[1][1]) / 2
-    # Calculate the change in x-coordinates
-    dx = (eye_landmarks[3][0] - eye_landmarks[0][0] + eye_landmarks[4][0] - eye_landmarks[1][0]) / 2
-    # Calculate the angle
-    angle = np.arctan2(dy, dx) * 180.0 / np.pi
-    return angle
-
 frame_width = 1366
 frame_height = 768
 
@@ -64,17 +54,13 @@ def capture():
             # Нарисуем выделение вокруг глаз
             # Извлечем координаты углов глаз
             left_eye_outer_pts = np.array([(landmarks.part(i).x, landmarks.part(i).y) for i in range(36, 42)],
-                                          np.int32)
+                                          np.float32)
             right_eye_outer_pts = np.array([(landmarks.part(i).x, landmarks.part(i).y) for i in range(42, 48)],
-                                           np.int32)
+                                           np.float32)
 
             for i in range(0, 67):
                 cv2.circle(frame, (landmarks.part(i).x, landmarks.part(i).y), radius=3, color=(0, 0, 255), thickness=-1)
 
-            # # Нарисуем линии вокруг глаз
-            # cv2.polylines(frame, [left_eye_outer_pts], isClosed=True, color=(210, 0, 210), thickness=2)
-            # cv2.polylines(frame, [right_eye_outer_pts], isClosed=True, color=(210, 0, 210), thickness=2)
-            #
             # # Рассчитаем ширину глаза (расстояние между внешними и внутренними углами)
             # left_eye_width = np.linalg.norm(left_eye_outer_pts[0] - left_eye_outer_pts[3])
             # right_eye_width = np.linalg.norm(right_eye_outer_pts[0] - right_eye_outer_pts[3])
@@ -93,55 +79,20 @@ def capture():
             cv2.putText(frame, f'Right Eye Closure: {right_eye_closure:.2f}', (20, 40), cv2.FONT_HERSHEY_SIMPLEX, 0.5,
                         (210, 0, 210), 1, cv2.LINE_AA)
 
-            # Нарисуем прямоугольники вокруг бровей
-            # left_eyebrow_left = (landmarks.part(17).x, landmarks.part(17).y)
-            # left_eyebrow_right = (landmarks.part(21).x, landmarks.part(21).y)
-            # right_eyebrow_left = (landmarks.part(22).x, landmarks.part(22).y)
-            # right_eyebrow_right = (landmarks.part(26).x, landmarks.part(26).y)
-            #
-            # cv2.rectangle(frame, left_eyebrow_left, left_eyebrow_right, (0, 0, 255), 2)
-            # cv2.rectangle(frame, right_eyebrow_left, right_eyebrow_right, (0, 0, 255), 2)
-            # cv2.putText(frame, 'Left Eyebrow', (left_eyebrow_left[0], left_eyebrow_left[1] - 10), cv2.FONT_HERSHEY_SIMPLEX,
-            #             0.5, (0, 0, 255), 2, cv2.LINE_AA)
-            # cv2.putText(frame, 'Right Eyebrow', (right_eyebrow_left[0], right_eyebrow_left[1] - 10),
-            #             cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255), 2, cv2.LINE_AA)
-
-            # Нарисуем выделение вокруг рта
-            # Извлечем координаты верхней и нижней части рта
-            # mouth_top_pts = np.array([(landmarks.part(i).x,
-            #                            landmarks.part(i).y) for i in range(48, 55)],
-            #                          np.int32)
-            # mouth_top_inner_pts = np.array([(landmarks.part(i).x,
-            #                                  landmarks.part(i).y) for i in range(60, 65)],
-            #                                np.int32)
-            # mouth_top_pts = np.insert(mouth_top_pts, len(mouth_top_pts), mouth_top_inner_pts, axis=0)
-            #
-            # mouth_bottom_pts = np.array([(landmarks.part(i).x,
-            #                               landmarks.part(i).y) for i in range(54, 60)],
-            #                             np.int32)
-            # mouth_bottom_inner_pts = np.array([(landmarks.part(i).x,
-            #                                     landmarks.part(i).y) for i in range(64, 68)],
-            #                                   np.int32)
-            # mouth_bottom_pts = np.insert(mouth_bottom_pts,
-            #                              len(mouth_bottom_pts),
-            #                              [(landmarks.part(48).x, landmarks.part(48).y)],
-            #                              axis=0)
-            # mouth_bottom_pts = np.insert(mouth_bottom_pts, len(mouth_bottom_pts), mouth_bottom_inner_pts, axis=0)
-            # mouth_bottom_pts = np.insert(mouth_bottom_pts,
-            #                              len(mouth_bottom_pts),
-            #                              [(landmarks.part(60).x, landmarks.part(48).y)],
-            #                              axis=0)
-            #
-            # # Нарисуем линии вокруг рта
-            # cv2.polylines(frame, [mouth_top_pts], isClosed=True, color=(0, 255, 0), thickness=2)
-            # cv2.polylines(frame, [mouth_bottom_pts], isClosed=True, color=(0, 255, 0), thickness=2)
-
+            # Рассчитаем открытость рта
             # Рассчитаем вертикальные расстояния между верхней и нижней частью рта
-            # mouth_height = np.linalg.norm(mouth_top_pts.mean(axis=0) - mouth_bottom_pts.mean(axis=0))
-            mouth_height = np.linalg.norm(landmarks.part(51).y - landmarks.part(57).y)
+            mouth_top_pt = np.array([(landmarks.part(62).x, landmarks.part(62).y)],
+                                          np.float32)
+            mouth_bottom_pt = np.array([(landmarks.part(66).x, landmarks.part(66).y)],
+                                    np.float32)
+            mouth_height = dist.euclidean(mouth_top_pt[0], mouth_bottom_pt[0])
 
             # Рассчитаем ширину рта (расстояние между уголками рта)
-            mouth_width = np.linalg.norm(landmarks.part(48).x - landmarks.part(54).x)
+            mouth_left_pt = np.array([(landmarks.part(60).x, landmarks.part(60).y)],
+                                    np.float32)
+            mouth_right_pt = np.array([(landmarks.part(64).x, landmarks.part(64).y)],
+                                       np.float32)
+            mouth_width = dist.euclidean(mouth_left_pt[0], mouth_right_pt[0])
 
             # Рассчитаем уровень открытости рта (1 - открыт, 0 - закрыт)
             mouth_openness = mouth_height / mouth_width
@@ -149,18 +100,25 @@ def capture():
             # Отобразим уровень открытости рта на изображении
             cv2.putText(frame, f'Mouth Openness: {mouth_openness:.2f}', (20, 60), cv2.FONT_HERSHEY_SIMPLEX, 0.5,
                         (255, 255, 255), 1, cv2.LINE_AA)
-            # cv2.putText(frame, 'Mouth', (mouth_top_pts[0][0], mouth_top_pts[0][1] - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2,
-            #            cv2.LINE_AA)
 
-
+            # Расчет поворотов головы по трем осям
             # Расчет поворота головы по оси Х
             # Рассчитаем расстояние от носа до правой части лица
-            nose_to_right =  np.abs(landmarks.part(16).x - landmarks.part(30).x)
+            # face_right_pt = np.array([(landmarks.part(16).x, landmarks.part(16).y)],
+            #                         np.float32)
+            # nose_center_pt = np.array([(landmarks.part(30).x, landmarks.part(30).y)],
+            #                         np.float32)
+            # nose_to_right = dist.euclidean(face_right_pt[0], nose_center_pt[0])
+            nose_to_right = np.abs(landmarks.part(16).x - landmarks.part(30).x)
 
             # Рассчитаем расстояние от носа до левой части лица
+            # face_left_pt = np.array([(landmarks.part(0).x, landmarks.part(0).y)],
+            #                         np.float32)
+            # nose_to_left = dist.euclidean(face_left_pt[0], nose_center_pt[0])
             nose_to_left = np.abs(landmarks.part(0).x - landmarks.part(30).x)
 
             # Рассчитаем расстояние от правой до левой части лица
+            # right_to_left = dist.euclidean(face_right_pt[0], face_left_pt[0])
             right_to_left = np.abs(landmarks.part(16).x - landmarks.part(0).x)
 
             # Рассчитаем уровень поворота головы по оси Х (1 - направо, -1 - налево)
@@ -190,12 +148,12 @@ def capture():
 
 
             # Расчет поворота головы по оси Z
-            # Assuming you have extracted the landmarks for the left and right eyes
-            left_eye_x = landmarks.part(39).y
-            right_eye_x = landmarks.part(42).y
+            # Для рассчетов беруться крайние точки глаз
+            left_eye_y = landmarks.part(39).y
+            right_eye_y = landmarks.part(42).y
 
-            # Calculate the roll rotation
-            roll_rotation = -1 * (right_eye_x - left_eye_x) / (landmarks.part(31).x - landmarks.part(35).x)
+            # Рассчитаем уровень поворота головы по оси Z (1 - враво, -1 - влево)
+            roll_rotation = -1 * (right_eye_y - left_eye_y) / (landmarks.part(31).x - landmarks.part(35).x)
 
             # Отобразим уровень поворота головы по оси Z
             cv2.putText(frame, f'head rot Z: {roll_rotation:.2f}', (20, 120), cv2.FONT_HERSHEY_SIMPLEX, 0.5,
