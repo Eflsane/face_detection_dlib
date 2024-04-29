@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="0fb1735e-5b10-423c-b7d9-e7a8c0561d05" name="Changes" comment="Project from before using git. &#10;my_file_loader.py&#10;Implemented loading of dlib data files and test video file.&#10;&#10;main_test.py&#10;Implemented face detection with openCV and dlib library.&#10;Implemented eyes closure computation by using Euclidean distance and aspect ratio.&#10;Implemented mouth closure computation by using it's height to width ratio&#10;Implemented computation of the face rotation by three axis X, Y, Z:&#10;For X using nose to left and right side of the face ratio&#10;For Y using from top nose side to chin ratio&#10;For Z using eyes distance and nose tip width ratio.&#10;&#10;main.py&#10;Implemented face detection with openCV and dlib library.&#10;Implemented eyes closure computation by using Euclidean distance and aspect ratio.&#10;Implemented mouth closure computation by using it's height to width ratio&#10;Implemented video steaming to bites and sending it to the local host by using Flask server library">
+      <change afterPath="$PROJECT_DIR$/.idea/face_detection_dlib.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example_video.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/my_file_loader.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shape_predictor_68_face_landmarks.dat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shape_predictor_68_face_landmarks.png" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
+}</component>
+  <component name="ProjectId" id="2faveXQPFjEof5zI38uFfRA1OtH" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python.main_test.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "F:/py_proj/openCV_test",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="F:\py_proj\face_detection_dlib" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+      <module name="face_detection_dlib" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-python-sdk-0509580d9d50-746f403e7f0c-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-241.14494.241" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="0fb1735e-5b10-423c-b7d9-e7a8c0561d05" name="Changes" comment="" />
+      <created>1714052098483</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1714052098483</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Project from before using git." />
+    <MESSAGE value="Project from before using git. &#10;my_file_loader.py&#10;Implemented loading of dlib data files and test video file.&#10;&#10;main_test.py&#10;Implemented face detection with openCV and dlib library.&#10;Implemented eyes closure computation by using Euclidean distance and aspect ratio.&#10;Implemented mouth closure computation by using it's height to width ratio&#10;Implemented computation of the face rotation by three axis X, Y, Z:&#10;For X using nose to left and right side of the face ratio&#10;For Y using from top nose side to chin ratio&#10;For Z using eyes distance and nose tip width ratio.&#10;&#10;main.py&#10;Implemented face detection with openCV and dlib library.&#10;Implemented eyes closure computation by using Euclidean distance and aspect ratio.&#10;Implemented mouth closure computation by using it's height to width ratio&#10;Implemented video steaming to bites and sending it to the local host by using Flask server library" />
+    <option name="LAST_COMMIT_MESSAGE" value="Project from before using git. &#10;my_file_loader.py&#10;Implemented loading of dlib data files and test video file.&#10;&#10;main_test.py&#10;Implemented face detection with openCV and dlib library.&#10;Implemented eyes closure computation by using Euclidean distance and aspect ratio.&#10;Implemented mouth closure computation by using it's height to width ratio&#10;Implemented computation of the face rotation by three axis X, Y, Z:&#10;For X using nose to left and right side of the face ratio&#10;For Y using from top nose side to chin ratio&#10;For Z using eyes distance and nose tip width ratio.&#10;&#10;main.py&#10;Implemented face detection with openCV and dlib library.&#10;Implemented eyes closure computation by using Euclidean distance and aspect ratio.&#10;Implemented mouth closure computation by using it's height to width ratio&#10;Implemented video steaming to bites and sending it to the local host by using Flask server library" />
+  </component>
+</project>
