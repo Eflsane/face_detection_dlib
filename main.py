@@ -93,8 +93,6 @@ def capture():
             cv2.putText(frame, f'Mouth Openness: {mouth_openness:.2f}', (20, 60), cv2.FONT_HERSHEY_SIMPLEX, 0.5,
                         (255, 255, 255), 1, cv2.LINE_AA)
 
-        json_data = json.dump(landmarks)
-
         (flag, encoded_image) = cv2.imencode('.jpeg', frame)
         yield (b'--frame\r\n\r\n' + bytearray(encoded_image) + b'\r\n')
 

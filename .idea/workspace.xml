@@ -4,8 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0fb1735e-5b10-423c-b7d9-e7a8c0561d05" name="Changes" comment="main_test.py file now added">
+    <list default="true" id="0fb1735e-5b10-423c-b7d9-e7a8c0561d05" name="Changes" comment="main_test.py &#10;Refactored code.&#10;Removed unnecessary comments.&#10;Changed mouth openness calculation: instead of np.linear function that used only x-axis or y-axis of mouth points, now dist.Euclidean function is using.">
+      <change afterPath="$PROJECT_DIR$/face_calculations.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_test2.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_test3.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_test.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -32,23 +36,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python.main.executor": "Run",
-    "Python.main_test.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master",
-    "last_opened_file_path": "F:/py_proj/openCV_test",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.face_calculations.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main_test.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main_test2.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main_test3.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;F:/py_proj/face_detection_dlib/main_test.py&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="F:\py_proj\face_detection_dlib" />
     </key>
   </component>
   <component name="RunManager">
-    <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+    <configuration name="main_test" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="face_detection_dlib" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -61,7 +68,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main_test.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -103,7 +110,15 @@
       <option name="project" value="LOCAL" />
       <updated>1714395523065</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="main_test.py &#10;Refactored code.&#10;Removed unnecessary comments.&#10;Changed mouth openness calculation: instead of np.linear function that used only x-axis or y-axis of mouth points, now dist.Euclidean function is using.">
+      <option name="closed" value="true" />
+      <created>1714403261439</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1714403261439</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -133,6 +148,7 @@
     <MESSAGE value="Project from before using git." />
     <MESSAGE value="Project from before using git. &#10;my_file_loader.py&#10;Implemented loading of dlib data files and test video file.&#10;&#10;main_test.py&#10;Implemented face detection with openCV and dlib library.&#10;Implemented eyes closure computation by using Euclidean distance and aspect ratio.&#10;Implemented mouth closure computation by using it's height to width ratio&#10;Implemented computation of the face rotation by three axis X, Y, Z:&#10;For X using nose to left and right side of the face ratio&#10;For Y using from top nose side to chin ratio&#10;For Z using eyes distance and nose tip width ratio.&#10;&#10;main.py&#10;Implemented face detection with openCV and dlib library.&#10;Implemented eyes closure computation by using Euclidean distance and aspect ratio.&#10;Implemented mouth closure computation by using it's height to width ratio&#10;Implemented video steaming to bites and sending it to the local host by using Flask server library" />
     <MESSAGE value="main_test.py file now added" />
-    <option name="LAST_COMMIT_MESSAGE" value="main_test.py file now added" />
+    <MESSAGE value="main_test.py &#10;Refactored code.&#10;Removed unnecessary comments.&#10;Changed mouth openness calculation: instead of np.linear function that used only x-axis or y-axis of mouth points, now dist.Euclidean function is using." />
+    <option name="LAST_COMMIT_MESSAGE" value="main_test.py &#10;Refactored code.&#10;Removed unnecessary comments.&#10;Changed mouth openness calculation: instead of np.linear function that used only x-axis or y-axis of mouth points, now dist.Euclidean function is using." />
   </component>
 </project>
