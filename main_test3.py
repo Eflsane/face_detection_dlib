@@ -4,6 +4,7 @@ from sys import exception
 
 import cv2
 import dlib
+import imutils
 import numpy as np
 from imutils import encodings
 
@@ -23,7 +24,7 @@ def connect_to_tcp_server(host, port):
         # connect to the port
         s.connect((host, port))
         print('connected to ' + host + ':' + str(port))
-    except exception() as ex:
+    except BaseException() as ex:
         print(f'An exception has occurred. Details: \n {ex}')
         s.close()
 
@@ -33,7 +34,7 @@ def start_app(host='localhost', port=13967, frame_width=512, frame_height=512):
     try:
         connect_to_tcp_server(host, port)
         get_face_params(frame_width, frame_height)
-    except exception() as ex:
+    except BaseException() as ex:
         print(f'An exception has occurred. Details: \n {ex}')
     finally:
         s.close()
@@ -135,16 +136,16 @@ def capture(frame_width=512, frame_height=512):
 def get_face_params(frame_width=640, frame_height=480, camera=0):
     # Загрузим изображение с камеры
     cap = cv2.VideoCapture(camera)
-    cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
-    cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
+    #cap.set(cv2.CAP_PROP_FRAME_WIDTH, frame_width)
+    #cap.set(cv2.CAP_PROP_FRAME_HEIGHT, frame_height)
 
+    head_rot = np.array([0.0, 0.0, 0.0])
+    left_eye_closure = 0.0
+    right_eye_closure = 0.0
+    mouth_openness = 0.0
     while True:
-        head_rot = np.array([0.0, 0.0, 0.0])
-        left_eye_closure = 0.0
-        right_eye_closure = 0.0
-        mouth_openness = 0.0
-
         ret, frame = cap.read()
+        frame = imutils.resize(frame, width=frame_width, height=frame_height)
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
         if not ret:
             break
@@ -238,4 +239,4 @@ def get_face_params(frame_width=640, frame_height=480, camera=0):
 
 # Create a socket object
 s = socket.socket()
-start_app(frame_height=1280, frame_width=720)
+start_app(frame_width=640, frame_height=480)

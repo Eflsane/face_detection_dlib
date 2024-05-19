@@ -4,13 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0fb1735e-5b10-423c-b7d9-e7a8c0561d05" name="Changes" comment="main_test.py &#10;Refactored code.&#10;Removed unnecessary comments.&#10;Changed mouth openness calculation: instead of np.linear function that used only x-axis or y-axis of mouth points, now dist.Euclidean function is using.">
-      <change afterPath="$PROJECT_DIR$/face_calculations.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main_test2.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main_test3.py" afterDir="false" />
+    <list default="true" id="0fb1735e-5b10-423c-b7d9-e7a8c0561d05" name="Changes" comment="main.py&#10;Minor changes&#10;&#10;main_test.py &#10;Refactored code:&#10;All face calculations moved to separate methods &#10;First failed try to calculate smiling value&#10;Removed unnecessary comments.&#10;&#10;main_test2.py&#10;Copy of main_test &#10;Flask server functions implemented:&#10;Sending videostream on http request.&#10;Sending a stream of JSON string of face calculated values on http request.&#10;&#10;main_test3&#10;Copy of main_test2&#10;All face calculation methods were moved to separate file module named &quot;face_calculations&quot;&quot;.&#10;Tcp client functions instead of flask implemented:&#10;Sending a stream of JSON string of face calculated values to tcp server.&#10;&#10;face_calculations.py&#10;Separate module file with all face calculations created.&#10;Changed head Z rotation:&#10;Now using difference between Y and X axis of the eyes to find rotation angle.">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/buildozer.spec" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/face_detection_utils.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main.spec" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_one_exe.spec" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_test3_my_nn.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/model.pt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/model3.pt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/model4.pt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/face_detection_dlib.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/face_detection_dlib.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_test3.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_test3.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/my_file_loader.py" beforeDir="false" afterPath="$PROJECT_DIR$/my_file_loader.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,6 +34,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 7
 }</component>
@@ -39,13 +49,15 @@
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;Python.face_calculations.executor&quot;: &quot;Run&quot;,
+    &quot;Python.face_detection_utils.executor&quot;: &quot;Run&quot;,
     &quot;Python.main.executor&quot;: &quot;Run&quot;,
     &quot;Python.main_test.executor&quot;: &quot;Run&quot;,
     &quot;Python.main_test2.executor&quot;: &quot;Run&quot;,
     &quot;Python.main_test3.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main_test3_my_nn.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;last_opened_file_path&quot;: &quot;F:/py_proj/face_detection_dlib/main_test.py&quot;,
+    &quot;last_opened_file_path&quot;: &quot;F:/down/pytorch_face_landmark-master/pytorch_face_landmark-master&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
   }
 }</component>
@@ -118,7 +130,15 @@
       <option name="project" value="LOCAL" />
       <updated>1714403261439</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="main.py&#10;Minor changes&#10;&#10;main_test.py &#10;Refactored code:&#10;All face calculations moved to separate methods &#10;First failed try to calculate smiling value&#10;Removed unnecessary comments.&#10;&#10;main_test2.py&#10;Copy of main_test &#10;Flask server functions implemented:&#10;Sending videostream on http request.&#10;Sending a stream of JSON string of face calculated values on http request.&#10;&#10;main_test3&#10;Copy of main_test2&#10;All face calculation methods were moved to separate file module named &quot;face_calculations&quot;&quot;.&#10;Tcp client functions instead of flask implemented:&#10;Sending a stream of JSON string of face calculated values to tcp server.&#10;&#10;face_calculations.py&#10;Separate module file with all face calculations created.&#10;Changed head Z rotation:&#10;Now using difference between Y and X axis of the eyes to find rotation angle.">
+      <option name="closed" value="true" />
+      <created>1715254768734</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1715254768734</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -149,6 +169,7 @@
     <MESSAGE value="Project from before using git. &#10;my_file_loader.py&#10;Implemented loading of dlib data files and test video file.&#10;&#10;main_test.py&#10;Implemented face detection with openCV and dlib library.&#10;Implemented eyes closure computation by using Euclidean distance and aspect ratio.&#10;Implemented mouth closure computation by using it's height to width ratio&#10;Implemented computation of the face rotation by three axis X, Y, Z:&#10;For X using nose to left and right side of the face ratio&#10;For Y using from top nose side to chin ratio&#10;For Z using eyes distance and nose tip width ratio.&#10;&#10;main.py&#10;Implemented face detection with openCV and dlib library.&#10;Implemented eyes closure computation by using Euclidean distance and aspect ratio.&#10;Implemented mouth closure computation by using it's height to width ratio&#10;Implemented video steaming to bites and sending it to the local host by using Flask server library" />
     <MESSAGE value="main_test.py file now added" />
     <MESSAGE value="main_test.py &#10;Refactored code.&#10;Removed unnecessary comments.&#10;Changed mouth openness calculation: instead of np.linear function that used only x-axis or y-axis of mouth points, now dist.Euclidean function is using." />
-    <option name="LAST_COMMIT_MESSAGE" value="main_test.py &#10;Refactored code.&#10;Removed unnecessary comments.&#10;Changed mouth openness calculation: instead of np.linear function that used only x-axis or y-axis of mouth points, now dist.Euclidean function is using." />
+    <MESSAGE value="main.py&#10;Minor changes&#10;&#10;main_test.py &#10;Refactored code:&#10;All face calculations moved to separate methods &#10;First failed try to calculate smiling value&#10;Removed unnecessary comments.&#10;&#10;main_test2.py&#10;Copy of main_test &#10;Flask server functions implemented:&#10;Sending videostream on http request.&#10;Sending a stream of JSON string of face calculated values on http request.&#10;&#10;main_test3&#10;Copy of main_test2&#10;All face calculation methods were moved to separate file module named &quot;face_calculations&quot;&quot;.&#10;Tcp client functions instead of flask implemented:&#10;Sending a stream of JSON string of face calculated values to tcp server.&#10;&#10;face_calculations.py&#10;Separate module file with all face calculations created.&#10;Changed head Z rotation:&#10;Now using difference between Y and X axis of the eyes to find rotation angle." />
+    <option name="LAST_COMMIT_MESSAGE" value="main.py&#10;Minor changes&#10;&#10;main_test.py &#10;Refactored code:&#10;All face calculations moved to separate methods &#10;First failed try to calculate smiling value&#10;Removed unnecessary comments.&#10;&#10;main_test2.py&#10;Copy of main_test &#10;Flask server functions implemented:&#10;Sending videostream on http request.&#10;Sending a stream of JSON string of face calculated values on http request.&#10;&#10;main_test3&#10;Copy of main_test2&#10;All face calculation methods were moved to separate file module named &quot;face_calculations&quot;&quot;.&#10;Tcp client functions instead of flask implemented:&#10;Sending a stream of JSON string of face calculated values to tcp server.&#10;&#10;face_calculations.py&#10;Separate module file with all face calculations created.&#10;Changed head Z rotation:&#10;Now using difference between Y and X axis of the eyes to find rotation angle." />
   </component>
 </project>
