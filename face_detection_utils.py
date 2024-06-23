@@ -1,18 +1,10 @@
-import torch
-import torchvision
 import torch.nn as nn
-import torch.optim as optim
 import torchvision.transforms.functional as tf
-from torch.utils.data import Dataset, DataLoader, random_split
-from torchvision import transforms
-from torchsummary import summary
-from my_file_loader import load_shape_predictor_dat_file, load_model_file
-from my_file_loader import load_example_video
 
 
-class DepthewiseSeperableConv2d(nn.Module):
+class DepthwiseConv2d(nn.Module):
     def __init__(self, input_channels, output_channels, kernel_size, **kwargs):
-        super(DepthewiseSeperableConv2d, self).__init__()
+        super(DepthwiseConv2d, self).__init__()
 
         self.depthwise = nn.Conv2d(input_channels, input_channels, kernel_size, groups=input_channels, bias=False,
                                    **kwargs)
@@ -42,10 +34,10 @@ class EntryBlock(nn.Module):
         )
 
         self.conv3_residual = nn.Sequential(
-            DepthewiseSeperableConv2d(64, 64, 3, padding=1),
+            DepthwiseConv2d(64, 64, 3, padding=1),
             nn.BatchNorm2d(64),
             nn.LeakyReLU(0.2),
-            DepthewiseSeperableConv2d(64, 128, 3, padding=1),
+            DepthwiseConv2d(64, 128, 3, padding=1),
             nn.BatchNorm2d(128),
             nn.MaxPool2d(3, stride=2, padding=1),
         )
@@ -57,10 +49,10 @@ class EntryBlock(nn.Module):
 
         self.conv4_residual = nn.Sequential(
             nn.LeakyReLU(0.2),
-            DepthewiseSeperableConv2d(128, 128, 3, padding=1),
+            DepthwiseConv2d(128, 128, 3, padding=1),
             nn.BatchNorm2d(128),
             nn.LeakyReLU(0.2),
-            DepthewiseSeperableConv2d(128, 256, 3, padding=1),
+            DepthwiseConv2d(128, 256, 3, padding=1),
             nn.BatchNorm2d(256),
             nn.MaxPool2d(3, stride=2, padding=1)
         )
@@ -85,23 +77,23 @@ class EntryBlock(nn.Module):
         return x
 
 
-class MiddleBasicBlock(nn.Module):
+class MiddleConvBlock(nn.Module):
     def __init__(self):
-        super(MiddleBasicBlock, self).__init__()
+        super(MiddleConvBlock, self).__init__()
 
         self.conv1 = nn.Sequential(
             nn.LeakyReLU(0.2),
-            DepthewiseSeperableConv2d(256, 256, 3, padding=1),
+            DepthwiseConv2d(256, 256, 3, padding=1),
             nn.BatchNorm2d(256)
         )
         self.conv2 = nn.Sequential(
             nn.LeakyReLU(0.2),
-            DepthewiseSeperableConv2d(256, 256, 3, padding=1),
+            DepthwiseConv2d(256, 256, 3, padding=1),
             nn.BatchNorm2d(256)
         )
         self.conv3 = nn.Sequential(
             nn.LeakyReLU(0.2),
-            DepthewiseSeperableConv2d(256, 256, 3, padding=1),
+            DepthwiseConv2d(256, 256, 3, padding=1),
             nn.BatchNorm2d(256)
         )
 
@@ -117,7 +109,7 @@ class MiddleBlock(nn.Module):
     def __init__(self, num_blocks):
         super().__init__()
 
-        self.block = nn.Sequential(*[MiddleBasicBlock() for _ in range(num_blocks)])
+        self.block = nn.Sequential(*[MiddleConvBlock() for _ in range(num_blocks)])
 
     def forward(self, x):
         x = self.block(x)
@@ -131,10 +123,10 @@ class ExitBlock(nn.Module):
 
         self.residual = nn.Sequential(
             nn.LeakyReLU(0.2),
-            DepthewiseSeperableConv2d(256, 256, 3, padding=1),
+            DepthwiseConv2d(256, 256, 3, padding=1),
             nn.BatchNorm2d(256),
             nn.LeakyReLU(0.2),
-            DepthewiseSeperableConv2d(256, 512, 3, padding=1),
+            DepthwiseConv2d(256, 512, 3, padding=1),
             nn.BatchNorm2d(512),
             nn.MaxPool2d(3, stride=2, padding=1)
         )
@@ -145,10 +137,10 @@ class ExitBlock(nn.Module):
         )
 
         self.conv = nn.Sequential(
-            DepthewiseSeperableConv2d(512, 512, 3, padding=1),
+            DepthwiseConv2d(512, 512, 3, padding=1),
             nn.BatchNorm2d(512),
             nn.LeakyReLU(0.2),
-            DepthewiseSeperableConv2d(512, 1024, 3, padding=1),
+            DepthwiseConv2d(512, 1024, 3, padding=1),
             nn.BatchNorm2d(1024),
             nn.LeakyReLU(0.2)
         )
@@ -216,4 +208,7 @@ class FaceLandmarks:
     def part(self, num: int) -> FaceLandmarksPart:
         part = self.parts[num]
         return part
+
+    def total_parts(self) -> int:
+        return self.parts.__len__()
 

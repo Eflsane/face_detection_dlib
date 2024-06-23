@@ -10,31 +10,34 @@ def get_head_rotations(face):
     #                         np.float32)
     # nose_center_pt = np.array([(landmarks.part(30).x, landmarks.part(30).y)],
     #                         np.float32)
-    # nose_to_right = dist.euclidean(face_right_pt[0], nose_center_pt[0])
-    nose_to_right = np.abs(face[16][0] - face[30][0])
+    nose_to_right = np.abs(dist.euclidean(face[16], face[30]))
+    # nose_to_right = np.abs(face[16][0] - face[30][0])
 
     # Рассчитаем расстояние от носа до левой части лица
     # face_left_pt = np.array([(landmarks.part(0).x, landmarks.part(0).y)],
     #                         np.float32)
-    # nose_to_left = dist.euclidean(face_left_pt[0], nose_center_pt[0])
-    nose_to_left = np.abs(face[0][0] - face[30][0])
+    nose_to_left = np.abs(dist.euclidean(face[0], face[30]))
+    # nose_to_left = np.abs(face[0][0] - face[30][0])
 
     # Рассчитаем расстояние от правой до левой части лица
-    # right_to_left = dist.euclidean(face_right_pt[0], face_left_pt[0])
-    right_to_left = np.abs(face[16][0] - face[0][0])
+    right_to_left = np.abs(dist.euclidean(face[16], face[0]))
+    # right_to_left = np.abs(face[16][0] - face[0][0])
 
     # Рассчитаем уровень поворота головы по оси Х (1 - направо, -1 - налево)
     head_rot_X = (nose_to_left - nose_to_right) / right_to_left
 
     # Расчет поворота головы по оси У
     # Рассчитаем расстояние от носа до нижней до верхней части носа
-    nose_to_top = np.abs(face[33][1] - face[27][1])
+    nose_to_top = np.abs(dist.euclidean(face[33], face[27]))
+    # nose_to_top = np.abs(face[33][1] - face[27][1])
 
     # Рассчитаем расстояние от подбородка до нижней части носа
-    nose_to_bottom = np.abs(face[8][1] - face[33][1])
+    nose_to_bottom = np.abs(dist.euclidean(face[8], face[33]))
+    # nose_to_bottom = np.abs(face[8][1] - face[33][1])
 
     # Рассчитаем расстояние от подбородка до верхней части носа
-    top_to_bottom = np.abs(face[8][1] - face[27][1])
+    top_to_bottom = np.abs(dist.euclidean(face[8], face[27]))
+    # top_to_bottom = np.abs(face[8][1] - face[27][1])
 
     # Рассчитаем уровень поворота головы по оси У (1 - вверх, -1 - вниз)
     head_rot_Y = (nose_to_bottom - nose_to_top) / top_to_bottom

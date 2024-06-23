@@ -1,19 +1,11 @@
 import json
 import socket
-from sys import exception
-
 import cv2
 import dlib
 import imutils
 import numpy as np
 import torch
-import torchvision
-import torch.nn as nn
-import torch.optim as optim
-import torchvision.transforms.functional as tf
 from imutils import face_utils
-from torch.utils.data import Dataset, DataLoader, random_split
-from torchvision import transforms
 from torchsummary import summary
 
 from face_calculations import get_head_rotations, get_eye_aspect_ratio, get_mouth_openness_value, get_smile_value
@@ -31,7 +23,7 @@ def connect_to_tcp_server(host, port):
         # connect to the port
         s.connect((host, port))
         print('connected to ' + host + ':' + str(port))
-    except BaseException() as ex:
+    except BaseException as ex:
         print(f'An exception has occurred. Details: \n {ex}')
         s.close()
 
@@ -41,20 +33,21 @@ def start_app(host='localhost', port=13967, frame_width=512, frame_height=512):
     try:
         connect_to_tcp_server(host, port)
         get_face_params(frame_width, frame_height)
-    except BaseException() as ex:
+    except BaseException as ex:
         print(f'An exception has occurred. Details: \n {ex}')
     finally:
         s.close()
 
 
-predictor = XceptionNet()
-predictor.load_state_dict(torch.load(load_model_file(), map_location='cpu'))
 if torch.cuda.is_available():
     device = torch.device("cuda")
     print("PyTorch is using the GPU")
 else:
     device = torch.device("cpu")
     print("PyTorch is using the CPU")
+
+predictor = XceptionNet()
+predictor.load_state_dict(torch.load(load_model_file(), map_location=device))  # , map_location='cpu'
 
 predictor.to(device)
 predictor.eval()
@@ -83,9 +76,8 @@ def get_face_params(frame_width=640, frame_height=480, camera=0):
         # Обнаружим лица на изображении
         faces = detector(gray)
 
-        landmarks = []
-
         for face in faces:
+            landmarks = []
             # Нарисуем прямоугольник вокруг лица
             cv2.rectangle(frame, (face.left(), face.top()), (face.right(), face.bottom()), (255, 0, 0), 2)
 
@@ -101,6 +93,9 @@ def get_face_params(frame_width=640, frame_height=480, camera=0):
             landmarks = landmarks_to_numerable_list(frame, landmarks)
 
             # landmarks = predictor(gray, face)
+
+            if landmarks.total_parts() <= 0:
+                break
 
             # Отобразим точки лица на изображении
             for i in range(0, 67):
@@ -137,6 +132,7 @@ def get_face_params(frame_width=640, frame_height=480, camera=0):
             cv2.putText(frame, f'Right Eye Closure: {right_eye_closure:.2f}', (20, 40), cv2.FONT_HERSHEY_SIMPLEX, 0.5,
                         (210, 0, 210), 1, cv2.LINE_AA)
 
+
             # Рассчитаем открытость рта
             # Извлечем координаты рта
             mouth_pts = np.array([(landmarks.part(i).x, landmarks.part(i).y) for i in range(48, 67)],
@@ -149,10 +145,10 @@ def get_face_params(frame_width=640, frame_height=480, camera=0):
 
             # Расчет силы улыбки
             # Рассчитаем силу улыбки, где 0 - нет улыбки, 1 - максимальная улыбка
-            smile_intensity = get_smile_value(landmarks_array)
+            # smile_intensity = get_smile_value(landmarks_array)
             # Отобразим уровень улыбчивости
-            cv2.putText(frame, f'Im smiling: {smile_intensity:.2f}', (20, 160), cv2.FONT_HERSHEY_SIMPLEX, 0.5,
-                        (255, 255, 255), 1, cv2.LINE_AA)
+            # cv2.putText(frame, f'Im smiling: {smile_intensity:.2f}', (20, 160), cv2.FONT_HERSHEY_SIMPLEX, 0.5,
+            #             (255, 255, 255), 1, cv2.LINE_AA)
 
 
         # Отобразим результат
